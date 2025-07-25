@@ -3,7 +3,6 @@ import { query } from './src/config/db';
 
 const PORT = process.env.PORT || 3000;
 
-// Test database connection
 query('SELECT NOW()', [])
   .then(() => {
     console.log('Database connected');

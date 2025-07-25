@@ -10,15 +10,6 @@ export const getActiveBanners = async (): Promise<IBanner[]> => {
   }
 };
 
-export const getBannerById = async (id: number): Promise<IBanner | null> => {
-  try {
-    const result = await query('SELECT * FROM banners WHERE id = $1', [id]);
-    return result.rows[0] || null;
-  } catch (error) {
-    throw new Error(`Error fetching banner: ${error}`);
-  }
-};
-
 export const createBanner = async (bannerData: IBanner): Promise<IBanner> => {
 
   const { banner_name, banner_image, description } = bannerData;

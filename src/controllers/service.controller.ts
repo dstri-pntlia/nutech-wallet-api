@@ -1,13 +1,12 @@
 import { Request, Response } from 'express';
-import { query } from '../config/db';
 import { apiResponse } from '../utils/apiResponse';
-import { createService as createServiceModel } from '../models/service.model';
+import { createService as createServiceModel, getActiveServices } from '../models/service.model';
 import { IService } from '../interfaces/service.interface';
 
 export const getServices = async (req: Request, res: Response) => {
   try {
-    const result = await query('SELECT * FROM services WHERE is_active = true');
-    return apiResponse(res, 200, 'Sukses', result.rows);
+    const service = await getActiveServices()
+    return apiResponse(res, 200, 'Sukses', service);
   } catch (error) {
     console.error(error);
     return apiResponse(res, 500, 'Internal Server Error', null);

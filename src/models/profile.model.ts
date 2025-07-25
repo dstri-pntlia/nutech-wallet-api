@@ -11,10 +11,3 @@ export const updateUserProfile = async (userId: number, firstName: string, lastN
     [firstName, lastName, userId]
   );
 };
-
-export const updateProfileImage = async (userId: number, imagePath: string) => {
-  await query(
-    'UPDATE users SET profile_image = $1, updated_at = NOW() WHERE id = $2',
-    [imagePath, userId]
-  );
-};

@@ -1,13 +1,13 @@
 import { Request, Response } from 'express';
 import { query } from '../config/db';
 import { apiResponse } from '../utils/apiResponse';
-import { createBanner as createBannerModel } from '../models/banner.model';
+import { createBanner as createBannerModel, getActiveBanners } from '../models/banner.model';
 import { IBanner } from '../interfaces/banner.interface';
 
 export const getBanners = async (req: Request, res: Response) => {
   try {
-    const result = await query('SELECT * FROM banners WHERE is_active = true');
-    return apiResponse(res, 200, 'Get banner berhasil', result.rows);
+    const banners = await getActiveBanners();
+    return apiResponse(res, 200, 'Get banner berhasil', banners);
   } catch (error) {
     console.error(error);
     return apiResponse(res, 500, 'Internal Server Error', null);

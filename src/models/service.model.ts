@@ -10,15 +10,6 @@ export const getActiveServices = async (): Promise<IService[]> => {
   }
 };
 
-export const getServiceByCode = async (serviceCode: string): Promise<IService | null> => {
-  try {
-    const result = await query('SELECT * FROM services WHERE service_code = $1', [serviceCode]);
-    return result.rows[0] || null;
-  } catch (error) {
-    throw new Error(`Error fetching service: ${error}`);
-  }
-};
-
 export const createService = async (serviceData: IService): Promise<IService> => {
   const { service_code, service_name, service_icon, service_tariff, is_active } = serviceData;
 
